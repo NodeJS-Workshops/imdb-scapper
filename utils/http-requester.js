@@ -1,4 +1,4 @@
-/* globals module require Promise */
+/* globals module require */
 "use strict";
 
 const request = require("request");
@@ -8,12 +8,16 @@ module.exports = {
         let promise = new Promise((resolve, reject) => {
             request(url, (err, response, body) => {
                 if (err) {
-                    return reject(err);
+                    reject(err);
                 }
 
-                resolve({ response, body });
+                resolve({
+                    body,
+                    response
+                });
             });
         });
+
         return promise;
     }
 };
