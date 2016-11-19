@@ -3,6 +3,6 @@
 
 const mongoose = require("mongoose");
 
-module.exports = function(connectionString) {
+module.exports = (connectionString) => {
     mongoose.connect(connectionString);
 };
