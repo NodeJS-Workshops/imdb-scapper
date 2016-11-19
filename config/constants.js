@@ -1,3 +1,6 @@
+/* globals module */
+"use strict";
+
 module.exports = {
     connectionString: "mongodb://localhost/moviesDb",
     genres: ["action", "sci-fi", "fantasy", "horror", "comedy"],
