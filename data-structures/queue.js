@@ -6,7 +6,7 @@ class Queue {
         this.items = [];
     }
     push(item) {
-        this.items.push(item);
+        this.items.unshift(item);
     }
     pop() {
         return this.items.pop();
@@ -14,17 +14,13 @@ class Queue {
     peek() {
         return this.items[this.items.length - 1];
     }
-
     isEmpty() {
         return this.length === 0;
     }
-
     get length() {
         return this.items.length;
     }
 }
 
-module.exports.getQueue = function() {
-    return new Queue();
-};
+module.exports.getQueue = () => new Queue();
 module.exports.Queue = Queue;
