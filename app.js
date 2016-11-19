@@ -1,5 +1,5 @@
 /* globals console require setTimeout Promise */
-'use strict';
+"use strict";
 
 const httpRequester = require("./utils/http-requester");
 const htmlParser = require("./utils/html-parser");
@@ -21,7 +21,7 @@ function wait(time) {
 
 constants.genres.forEach(genre => {
     for (let i = 0; i < constants.pagesCount; i += 1) {
-        let url = `http://www.imdb.com/search/title?genres=${genre}&title_type=feature&0sort=moviemeter,asc&page=${i+1}&view=simple&ref_=adv_nxt`;
+        let url = `http://www.imdb.com/search/title?genres=${genre}&title_type=feature&sort=moviemeter,asc&page=${i+1}&view=simple&ref_=adv_nxt`;
         urlsQueue.push(url);
     }
 });
@@ -32,12 +32,11 @@ function getMoviesFromUrl(url) {
         .then((result) => {
             const selector = ".col-title span[title] a";
             const html = result.body;
+
             return htmlParser.parseSimpleMovie(selector, html);
         })
         .then(movies => {
-            let dbMovies = movies.map(movie => {
-                return modelsFactory.getSimpleMovie(movie.title, movie.url);
-            });
+            let dbMovies = movies.map(movie => modelsFactory.getSimpleMovie(movie.title, movie.url));
 
             modelsFactory.insertManySimpleMovies(dbMovies);
 
@@ -47,7 +46,6 @@ function getMoviesFromUrl(url) {
             if (urlsQueue.isEmpty()) {
                 return;
             }
-
             getMoviesFromUrl(urlsQueue.pop());
         })
         .catch((err) => {
