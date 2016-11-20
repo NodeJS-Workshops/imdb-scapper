@@ -17,7 +17,7 @@ let SimpleMovieSchema = new Schema({
 
 //  /title/tt0067992/?ref_=adv_li_tt
 function extractImdbIdFromUrl(url) {
-    let index = url.indexOf("?ref");
+    let index = url.indexOf("/?ref");
 
     return url.substring("/title/".length, index);
 }
